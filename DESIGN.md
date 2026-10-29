@@ -1,4 +1,3 @@
-
 # Trade Recorder & PnL Service — System Design
 
 ## 1. Overview
@@ -35,7 +34,7 @@ A client sends an HTTP request to a FastAPI endpoint. The request is validated, 
 ## 4. Project Structure
 
 ```text
-C:\TradeLedger/
+C:\Trade Recorder & P (Profit) & L (Loss) Service/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py
@@ -175,3 +174,7 @@ The current test suite passes all seven tests.
 Database credentials are loaded from environment configuration and must not be committed to GitHub.
 
 This project is a take-home implementation. Before production use, additional work would be needed for authentication, authorization, structured logging, monitoring, database migration management, deployment configuration, and more extensive concurrency and integration testing.
+
+## 14. Repository
+
+GitHub: https://github.com/anuragshrivas027/trade-recorder-pnl-service

@@ -1,4 +1,3 @@
-
 # Trade Recorder & PnL Service — AI Usage Disclosure
 
 ## 1. Overview

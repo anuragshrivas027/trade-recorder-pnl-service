@@ -1,4 +1,3 @@
-
 # Trade Recorder & PnL Service
 
 Trade Recorder & PnL Service is a backend application built with **Python, FastAPI, and PostgreSQL** to record financial trades, track positions, calculate profit and loss (PnL), and reconcile internal trade records against external trading venue statements.
@@ -37,7 +36,7 @@ The project focuses on reliable trade ingestion, duplicate prevention, accurate 
 ## Project Structure
 
 ```text
-C:\TradeLedger/
+C:\Trade Recorder & P (Profit) & L (Loss) Service/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py
@@ -63,6 +62,8 @@ C:\TradeLedger/
 ├── DESIGN.md
 └── AI_USAGE.md
 ```
+
+The `.env` file stores local database connection settings. It is excluded from Git and must not be committed.
 
 ### Main Files
 
@@ -121,13 +122,13 @@ The project was developed on Windows 11 using Python 3.14.6 and PostgreSQL 17.11
 The project is located at:
 
 ```text
-C:\TradeLedger
+C:\Trade Recorder & P (Profit) & L (Loss) Service
 ```
 
 Open PowerShell or the VS Code terminal and run:
 
 ```powershell
-cd C:\TradeLedger
+cd "C:\Trade Recorder & P (Profit) & L (Loss) Service"
 ```
 
 ### 2. Create and Activate a Virtual Environment
@@ -165,6 +166,8 @@ tradeledger
 ```
 
 The database can be created using pgAdmin or the PostgreSQL command-line tool.
+
+The database name can remain `tradeledger`; it does not need to match the GitHub repository name.
 
 ### 5. Configure Environment Variables
 
@@ -343,7 +346,7 @@ Never commit passwords, credentials, or other secrets to the repository.
 
 ## Repository
 
-GitHub: [TradeLedger](https://github.com/anuragshrivas027/TradeLedger)
+GitHub: https://github.com/anuragshrivas027/trade-recorder-pnl-service
 
 ## Author
 
