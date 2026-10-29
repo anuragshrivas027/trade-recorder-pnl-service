@@ -1,5 +1,5 @@
 
-## TradeLedger — Trade Recording & P&L Service
+# TradeLedger — Trade Recording & P&L Service
 
 TradeLedger is a backend service built with **Python, FastAPI, and PostgreSQL** to record financial trades, track positions, calculate profit and loss (P&L), and reconcile internal trade records against external trading venue statements.
 
@@ -17,6 +17,7 @@ The project focuses on reliable trade ingestion, duplicate prevention, accurate 
 - **Price Updates:** Create or update the latest market price for a symbol.
 - **Trade Reconciliation:** Identify missing, extra, and mismatched trades.
 - **Automated Testing:** Verify core API and trading logic using pytest.
+- **Technical Documentation:** Includes system design, AI usage disclosure, and screenshots of API functionality and test results.
 
 ## Tech Stack
 
@@ -46,6 +47,16 @@ TradeLedger/
 │   └── services.py
 ├── tests/
 │   └── test_api.py
+├── screenshots/
+│   ├── postgres-service.png
+│   ├── postgres-connection.png
+│   ├── database-setup.png
+│   ├── project-setup.png
+│   ├── api-docs.png
+│   ├── position-response.png
+│   ├── position-endpoint.png
+│   ├── price-update-pnl.png
+│   └── tests-passing.png
 ├── .env
 ├── .gitignore
 ├── requirements.txt
@@ -60,7 +71,36 @@ TradeLedger/
 - `schemas.py` — Validates incoming requests and defines response schemas.
 - `services.py` — Implements trade processing, position calculations, P&L, price updates, and reconciliation.
 - `test_api.py` — Contains automated API tests.
+- `screenshots/` — Contains screenshots demonstrating setup, API responses, P&L calculations, and test results.
 - `.env` — Stores local database connection settings and must not be committed to Git.
+
+## Screenshots
+
+The following screenshots demonstrate the application setup, API documentation, position calculations, market price updates, and automated test results.
+
+### 1. API Documentation
+
+The interactive Swagger UI provides access to the available endpoints and allows API requests to be tested.
+
+![TradeLedger API Documentation](screenshots/api-docs.png)
+
+### 2. Position Response
+
+The position endpoint returns the current quantity, average cost, realized P&L, latest market price, and unrealized P&L.
+
+![TradeLedger Position Response](screenshots/position-response.png)
+
+### 3. Price Update and Unrealized P&L
+
+Updating the latest market price recalculates the unrealized P&L for the open position.
+
+![TradeLedger Price Update and P&L](screenshots/price-update-pnl.png)
+
+### 4. Automated Tests
+
+The automated test suite completed successfully with seven passing tests during development.
+
+![TradeLedger Automated Tests](screenshots/tests-passing.png)
 
 ## Prerequisites
 
@@ -75,7 +115,7 @@ The project was developed on Windows 11 using Python 3.14.6 and PostgreSQL 17.11
 
 ## Setup and Installation
 
-### 1. Create the Project Directory
+### 1. Navigate to the Project Directory
 
 The project was created at:
 
@@ -100,7 +140,7 @@ python -m venv .venv
 Activate it in Windows PowerShell:
 
 ```powershell
-.venv\Scripts\Activate.ps1
+.\.venv\Scripts\Activate.ps1
 ```
 
 The terminal should display `(.venv)` when the environment is active.
@@ -133,7 +173,7 @@ DATABASE_URL=postgresql+psycopg://USERNAME:PASSWORD@localhost:5432/tradeledger
 
 Replace `USERNAME` and `PASSWORD` with your PostgreSQL credentials. URL-encode special characters in the password when required.
 
-Do not commit `.env` to GitHub.
+**Security:** Do not commit `.env` to GitHub.
 
 ### 6. Verify the Database Connection
 
@@ -155,11 +195,9 @@ python -m uvicorn app.main:app --reload
 
 The application runs at:
 
-http://127.0.0.1:8000
-
-Open the interactive Swagger documentation to test the API:
-
-http://127.0.0.1:8000/docs
+- API base URL: http://127.0.0.1:8000
+- Interactive Swagger documentation: http://127.0.0.1:8000/docs
+- OpenAPI schema: http://127.0.0.1:8000/openapi.json
 
 Stop the development server by pressing `Ctrl + C` in the terminal.
 
@@ -216,7 +254,7 @@ After these transactions, the expected position is:
 | Latest market price | 125 |
 | Unrealized P&L | 300 |
 
-**Realized P&L**
+### Realized P&L
 
 Realized P&L is calculated when a position is sold.
 
@@ -226,7 +264,7 @@ For the example:
 
 `5 × (120 − 105) = 75`
 
-**Unrealized P&L**
+### Unrealized P&L
 
 Unrealized P&L is calculated using the remaining quantity and latest market price.
 
@@ -242,7 +280,7 @@ Financial calculations use Python's `Decimal` type and SQL `NUMERIC` columns to 
 
 The reconciliation endpoint compares stored trades against an external venue statement.
 
-It returns three categories:
+It identifies three categories:
 
 - `missing_from_storage` — Trades present externally but absent from storage.
 - `extra_in_storage` — Trades present in storage but absent from the external statement.
@@ -278,7 +316,7 @@ The current test suite contains seven tests covering:
 
 The automated tests use SQLite for isolated testing. The PostgreSQL connection and selected API scenarios were also checked manually. Dedicated PostgreSQL concurrency tests have not yet been completed.
 
-## Documentation
+## Additional Documentation
 
 - [DESIGN.md](DESIGN.md) — Architecture, data model, accounting method, and design decisions.
 - [AI_USAGE.md](AI_USAGE.md) — Disclosure of AI assistance used during development.
@@ -302,7 +340,7 @@ Never commit passwords, credentials, or other secrets to the repository.
 
 ## Repository
 
-GitHub: https://github.com/anuragshrivas027/TradeLedger
+GitHub: [TradeLedger](https://github.com/anuragshrivas027/TradeLedger)
 
 ## Author
 
