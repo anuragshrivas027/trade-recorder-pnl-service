@@ -36,7 +36,7 @@ The project focuses on reliable trade ingestion, duplicate prevention, accurate 
 ## Project Structure
 
 ```text
-C:\Trade Recorder & P (Profit) & L (Loss) Service/
+C:\TradeLedger/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py
