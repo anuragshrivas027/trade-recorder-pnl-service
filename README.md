@@ -122,13 +122,13 @@ The project was developed on Windows 11 using Python 3.14.6 and PostgreSQL 17.11
 The project is located at:
 
 ```text
-C:\Trade Recorder & P (Profit) & L (Loss) Service
+C:\TradeLedger
 ```
 
 Open PowerShell or the VS Code terminal and run:
 
 ```powershell
-cd "C:\Trade Recorder & P (Profit) & L (Loss) Service"
+cd "C:\TradeLedger"
 ```
 
 ### 2. Create and Activate a Virtual Environment
