@@ -34,7 +34,7 @@ A client sends an HTTP request to a FastAPI endpoint. The request is validated, 
 ## 4. Project Structure
 
 ```text
-C:\Trade Recorder & P (Profit) & L (Loss) Service/
+C:\TradeLedger/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py
@@ -178,3 +178,4 @@ This project is a take-home implementation. Before production use, additional wo
 ## 14. Repository
 
 GitHub: https://github.com/anuragshrivas027/trade-recorder-pnl-service
+
