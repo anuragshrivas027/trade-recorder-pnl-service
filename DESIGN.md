@@ -1,9 +1,9 @@
 
-# TradeLedger — System Design
+# Trade Recorder & PnL Service — System Design
 
 ## 1. Overview
 
-TradeLedger is a REST API service for recording financial trades, tracking positions, calculating profit and loss (P&L), and reconciling trade records.
+Trade Recorder & PnL Service is a REST API application for recording financial trades, tracking positions, calculating profit and loss (PnL), and reconciling trade records.
 
 The application is built using Python and FastAPI, with PostgreSQL as the primary database. SQLAlchemy is used for database operations, and Pydantic is used for request validation.
 
@@ -24,7 +24,7 @@ The application follows a layered structure.
 
 1. **API Layer:** Defines HTTP endpoints and handles incoming requests.
 2. **Validation Layer:** Validates request data, including trade side, quantity, and price.
-3. **Service Layer:** Implements trade recording, duplicate detection, position calculations, P&L calculations, and reconciliation.
+3. **Service Layer:** Implements trade recording, duplicate detection, position calculations, PnL calculations, and reconciliation.
 4. **Database Layer:** Manages database connections and SQLAlchemy sessions.
 5. **Persistence Layer:** Stores trades and the latest market prices in database tables.
 
@@ -35,7 +35,7 @@ A client sends an HTTP request to a FastAPI endpoint. The request is validated, 
 ## 4. Project Structure
 
 ```text
-TradeLedger/
+C:\TradeLedger/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py
@@ -45,7 +45,16 @@ TradeLedger/
 │   └── services.py
 ├── tests/
 │   └── test_api.py
-├── .env
+├── screenshots/
+│   ├── postgres-service.png
+│   ├── postgres-connection.png
+│   ├── database-setup.png
+│   ├── project-setup.png
+│   ├── api-docs.png
+│   ├── position-response.png
+│   ├── position-endpoint.png
+│   ├── price-update-pnl.png
+│   └── tests-passing.png
 ├── .gitignore
 ├── requirements.txt
 ├── README.md
@@ -76,7 +85,7 @@ The combination of `venue` and `trade_id` is unique. This helps prevent the same
 
 ### Latest Price
 
-The Latest Price table stores the most recently recorded market price for each symbol. This price is used to calculate unrealized profit and loss.
+The Latest Price table stores the most recently recorded market price for each symbol. This price is used to calculate unrealized PnL.
 
 ## 6. Trade Recording and Idempotency
 
@@ -88,9 +97,9 @@ When a trade is submitted, the service checks whether a trade with the same venu
 
 This behavior makes retrying requests safer and prevents duplicate trades from affecting positions twice.
 
-## 7. Position and P&L Calculations
+## 7. Position and PnL Calculations
 
-TradeLedger uses an average-cost approach for calculating positions.
+Trade Recorder & PnL Service uses an average-cost approach for calculating positions.
 
 ### Average Cost
 
@@ -100,19 +109,19 @@ For a BUY trade:
 
 For a SELL trade, the average cost of the remaining position stays unchanged.
 
-### Realized P&L
+### Realized PnL
 
 For a SELL trade:
 
-`Realized P&L = Sold Quantity × (Sell Price − Average Cost)`
+`Realized PnL = Sold Quantity × (Sell Price − Average Cost)`
 
-### Unrealized P&L
+### Unrealized PnL
 
 For an open position:
 
-`Unrealized P&L = Current Quantity × (Latest Market Price − Average Cost)`
+`Unrealized PnL = Current Quantity × (Latest Market Price − Average Cost)`
 
-If the position has no remaining quantity, its open-position unrealized P&L is zero.
+If the position has no remaining quantity, its open-position unrealized PnL is zero.
 
 SELL trades that exceed the available position are rejected.
 
@@ -123,7 +132,7 @@ SELL trades that exceed the available position are rejected.
 | GET | `/health` | Check application health |
 | POST | `/trades` | Record a trade |
 | GET | `/trades` | Retrieve recorded trades |
-| GET | `/positions/{symbol}` | Retrieve position and P&L |
+| GET | `/positions/{symbol}` | Retrieve position and PnL |
 | PUT | `/prices/{symbol}` | Update the latest market price |
 | POST | `/reconciliation` | Compare trade records |
 
@@ -154,7 +163,7 @@ The automated test suite covers:
 - Health endpoint behavior.
 - Validation of invalid quantities.
 - Duplicate trade handling.
-- Average-cost and P&L calculations.
+- Average-cost and PnL calculations.
 - Rejection of overselling.
 - Reconciliation differences.
 - Rejection of conflicting duplicate trade identifiers.

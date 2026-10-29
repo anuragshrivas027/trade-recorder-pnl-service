@@ -1,9 +1,9 @@
 
-# TradeLedger — AI Usage Disclosure
+# Trade Recorder & PnL Service — AI Usage Disclosure
 
 ## 1. Overview
 
-AI tools were used as development assistants while building TradeLedger. Their purpose was to help understand the requirements, plan the implementation, improve code, troubleshoot errors, and prepare project documentation.
+AI tools were used as development assistants while building the Trade Recorder & PnL Service. They helped with understanding the requirements, planning the implementation, improving code, troubleshooting issues, and preparing project documentation.
 
 AI assistance was used as a support tool, not as a replacement for running and testing the application.
 
@@ -35,6 +35,8 @@ The application was run locally, and the automated test suite completed successf
 
 The API was also manually checked for trade submission, price updates, position calculations, and rejection of an oversell request.
 
+The automated tests use SQLite for isolated testing. The PostgreSQL connection and selected API scenarios were checked manually. Dedicated PostgreSQL concurrency tests have not yet been completed.
+
 These checks do not constitute full production verification. Additional PostgreSQL integration, concurrency, security, and deployment testing would be needed before production use.
 
 ## 4. Developer Responsibility
@@ -45,4 +47,4 @@ AI-generated suggestions may contain mistakes and must be reviewed and tested be
 
 ## 5. Limitations
 
-AI assistance does not guarantee that the application is free from bugs or security issues. The current implementation is intended as a take-home project and would need further hardening before production deployment.
+AI assistance does not guarantee that the application is free from bugs or security issues. The current implementation is intended as a take-home project and would need further testing and hardening before production deployment.

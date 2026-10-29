@@ -1,7 +1,7 @@
 
-# TradeLedger — Trade Recording & P&L Service
+# Trade Recorder & PnL Service
 
-TradeLedger is a backend service built with **Python, FastAPI, and PostgreSQL** to record financial trades, track positions, calculate profit and loss (P&L), and reconcile internal trade records against external trading venue statements.
+Trade Recorder & PnL Service is a backend application built with **Python, FastAPI, and PostgreSQL** to record financial trades, track positions, calculate profit and loss (PnL), and reconcile internal trade records against external trading venue statements.
 
 The project focuses on reliable trade ingestion, duplicate prevention, accurate financial calculations, and position validation.
 
@@ -11,8 +11,8 @@ The project focuses on reliable trade ingestion, duplicate prevention, accurate 
 - **Input Validation:** Reject invalid trade sides, non-positive quantities, and non-positive prices.
 - **Idempotency:** Prevent duplicate trades using the combination of venue and trade ID.
 - **Position Tracking:** Calculate net quantity and average cost for each symbol.
-- **Realized P&L:** Calculate profit or loss when a position is sold.
-- **Unrealized P&L:** Calculate profit or loss using the latest market price.
+- **Realized PnL:** Calculate profit or loss when a position is sold.
+- **Unrealized PnL:** Calculate profit or loss using the latest market price.
 - **Oversell Protection:** Reject SELL trades that exceed the available position.
 - **Price Updates:** Create or update the latest market price for a symbol.
 - **Trade Reconciliation:** Identify missing, extra, and mismatched trades.
@@ -37,7 +37,7 @@ The project focuses on reliable trade ingestion, duplicate prevention, accurate 
 ## Project Structure
 
 ```text
-TradeLedger/
+C:\TradeLedger/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py
@@ -57,7 +57,6 @@ TradeLedger/
 │   ├── position-endpoint.png
 │   ├── price-update-pnl.png
 │   └── tests-passing.png
-├── .env
 ├── .gitignore
 ├── requirements.txt
 ├── README.md
@@ -65,14 +64,16 @@ TradeLedger/
 └── AI_USAGE.md
 ```
 
+### Main Files
+
 - `main.py` — Defines the FastAPI application and API endpoints.
 - `database.py` — Configures the SQLAlchemy engine and database sessions.
 - `models.py` — Defines the Trade and LatestPrice database models.
 - `schemas.py` — Validates incoming requests and defines response schemas.
-- `services.py` — Implements trade processing, position calculations, P&L, price updates, and reconciliation.
+- `services.py` — Implements trade processing, position calculations, PnL, price updates, and reconciliation.
 - `test_api.py` — Contains automated API tests.
-- `screenshots/` — Contains screenshots demonstrating setup, API responses, P&L calculations, and test results.
-- `.env` — Stores local database connection settings and must not be committed to Git.
+- `screenshots/` — Contains screenshots demonstrating setup, API responses, PnL calculations, and test results.
+- `.env` — Stores local database connection settings. It is excluded from Git and must not be committed.
 
 ## Screenshots
 
@@ -82,25 +83,25 @@ The following screenshots demonstrate the application setup, API documentation, 
 
 The interactive Swagger UI provides access to the available endpoints and allows API requests to be tested.
 
-![TradeLedger API Documentation](screenshots/api-docs.png)
+![Trade Recorder API Documentation](screenshots/api-docs.png)
 
 ### 2. Position Response
 
-The position endpoint returns the current quantity, average cost, realized P&L, latest market price, and unrealized P&L.
+The position endpoint returns the current quantity, average cost, realized PnL, latest market price, and unrealized PnL.
 
-![TradeLedger Position Response](screenshots/position-response.png)
+![Trade Recorder Position Response](screenshots/position-response.png)
 
-### 3. Price Update and Unrealized P&L
+### 3. Price Update and Unrealized PnL
 
-Updating the latest market price recalculates the unrealized P&L for the open position.
+Updating the latest market price recalculates the unrealized PnL for the open position.
 
-![TradeLedger Price Update and P&L](screenshots/price-update-pnl.png)
+![Trade Recorder Price Update and PnL](screenshots/price-update-pnl.png)
 
 ### 4. Automated Tests
 
 The automated test suite completed successfully with seven passing tests during development.
 
-![TradeLedger Automated Tests](screenshots/tests-passing.png)
+![Trade Recorder Automated Tests](screenshots/tests-passing.png)
 
 ## Prerequisites
 
@@ -117,13 +118,13 @@ The project was developed on Windows 11 using Python 3.14.6 and PostgreSQL 17.11
 
 ### 1. Navigate to the Project Directory
 
-The project was created at:
+The project is located at:
 
 ```text
 C:\TradeLedger
 ```
 
-Open PowerShell or the VS Code terminal and navigate to the directory:
+Open PowerShell or the VS Code terminal and run:
 
 ```powershell
 cd C:\TradeLedger
@@ -144,6 +145,8 @@ Activate it in Windows PowerShell:
 ```
 
 The terminal should display `(.venv)` when the environment is active.
+
+If the virtual environment already exists, activate it instead of recreating it.
 
 ### 3. Install Dependencies
 
@@ -173,7 +176,7 @@ DATABASE_URL=postgresql+psycopg://USERNAME:PASSWORD@localhost:5432/tradeledger
 
 Replace `USERNAME` and `PASSWORD` with your PostgreSQL credentials. URL-encode special characters in the password when required.
 
-**Security:** Do not commit `.env` to GitHub.
+**Security:** Never commit `.env` to GitHub.
 
 ### 6. Verify the Database Connection
 
@@ -195,9 +198,9 @@ python -m uvicorn app.main:app --reload
 
 The application runs at:
 
-- API base URL: http://127.0.0.1:8000
-- Interactive Swagger documentation: http://127.0.0.1:8000/docs
-- OpenAPI schema: http://127.0.0.1:8000/openapi.json
+- **API base URL:** http://127.0.0.1:8000
+- **Swagger UI:** http://127.0.0.1:8000/docs
+- **OpenAPI schema:** http://127.0.0.1:8000/openapi.json
 
 Stop the development server by pressing `Ctrl + C` in the terminal.
 
@@ -208,7 +211,7 @@ Stop the development server by pressing `Ctrl + C` in the terminal.
 | GET | `/health` | Checks application health |
 | POST | `/trades` | Records a new trade |
 | GET | `/trades` | Retrieves recorded trades |
-| GET | `/positions/{symbol}` | Retrieves position and P&L |
+| GET | `/positions/{symbol}` | Retrieves position and PnL |
 | PUT | `/prices/{symbol}` | Creates or updates the latest market price |
 | POST | `/reconciliation` | Reconciles stored trades against an external statement |
 
@@ -232,9 +235,9 @@ Submit a BUY trade using `POST /trades`:
 
 A newly recorded trade returns HTTP `201 Created`. An identical duplicate returns the existing trade rather than recording it again. Reusing the same venue and trade ID with different details is rejected.
 
-## Position and P&L Calculation
+## Position and PnL Calculation
 
-TradeLedger uses the **average-cost method** to calculate positions and profit and loss.
+Trade Recorder & PnL Service uses the **average-cost method** to calculate positions and profit and loss.
 
 Consider these trades:
 
@@ -250,25 +253,25 @@ After these transactions, the expected position is:
 |---|---:|
 | Remaining quantity | 15 |
 | Average cost | 105 |
-| Realized P&L | 75 |
+| Realized PnL | 75 |
 | Latest market price | 125 |
-| Unrealized P&L | 300 |
+| Unrealized PnL | 300 |
 
-### Realized P&L
+### Realized PnL
 
-Realized P&L is calculated when a position is sold.
+Realized PnL is calculated when a position is sold.
 
-`Realized P&L = Sold quantity × (Sell price − Average cost)`
+`Realized PnL = Sold quantity × (Sell price − Average cost)`
 
 For the example:
 
 `5 × (120 − 105) = 75`
 
-### Unrealized P&L
+### Unrealized PnL
 
-Unrealized P&L is calculated using the remaining quantity and latest market price.
+Unrealized PnL is calculated using the remaining quantity and latest market price.
 
-`Unrealized P&L = Remaining quantity × (Latest price − Average cost)`
+`Unrealized PnL = Remaining quantity × (Latest price − Average cost)`
 
 For the example:
 
@@ -307,7 +310,7 @@ The current test suite contains seven tests covering:
 1. Application health.
 2. Rejection of non-positive quantities.
 3. Duplicate trade prevention.
-4. Average-cost and P&L calculations.
+4. Average-cost and PnL calculations.
 5. Oversell rejection and unchanged position.
 6. Trade reconciliation.
 7. Conflicting data for an existing trade ID.
